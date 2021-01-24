@@ -108,3 +108,76 @@ Web标准提出的最佳解决方案是：**结构、样式、行为相分离**�
 简单理解：结构写在HTML文件中，样式写在CSS文件中，行为写在js文件中。
 
 ![image-20210122231624701](C:\Users\sheny\AppData\Roaming\Typora\typora-user-images\image-20210122231624701.png)
+
+
+
+## 4.	HTML标签
+
+### 4.1	基本语法概述
+
+1. HTML标签是**由尖括号包围的关键词**，例如`<html>`
+2. HTML标签通常是成对出现的，例如`<html>` 和`</html>`，我们称之为**双标签**。标签对中的第一个标签是开始标签，第二个标签是结束标签。
+3. 有些特殊的标签必须是单个标签（极少情况），例如`<br/>`，我们称之为**单标签**。
+
+
+
+### 4.2	标签关系
+
+双标签关系可以分为两类：**包含关系**和**并列关系**。
+
+**包含关系**：
+
+```html
+<head>
+    <title>
+        
+    </title>
+</head>
+```
+
+**并列关系**：
+
+```html
+<head></head>
+<body></body>
+```
+
+## 5.	HTML基本结构标签
+
+### 5.1	第一个HTML网页
+
+每个网页都会有一个基本的结构标签（也称为骨架标签），页面内容䦹在这些基本标签上书写。
+
+HTML页面也被称为HTML文档。
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description"content="This is an awesome website">
+        <title>This is my first website</title>
+    </head>
+    <body>
+        <!--六种标题和正文段落-->
+        <h1>Headline 1</h1>
+        <h2>Headline 2</h2>
+        <h3>Headline 3</h3>
+        <h4>Headline 4</h4>
+        <h5>Headline 5</h5>
+        <h6>Headline 6</h6>
+        <p>"Hello World!"</p>
+        <hr/>
+    </body>
+</html>
+```
+
+### 5.2	基本标签速查
+
+https://www.runoob.com/tags/html-reference.html
+
+https://www.w3school.com.cn/html/html_quick.asp
+
+## 6.	图像标签
+
+6.1图像标签
