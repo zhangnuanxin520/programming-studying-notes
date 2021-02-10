@@ -1,5 +1,88 @@
 # MySQL学习笔记
 
+[TOC]
+
+
+
+## MySQL预留字集合
+
+| ADD                | ALL                 | ALTER              |
+| ------------------ | ------------------- | ------------------ |
+| ANALYZE            | AND                 | AS                 |
+| ASC                | ASENSITIVE          | BEFORE             |
+| BETWEEN            | BIGINT              | BINARY             |
+| BLOB               | BOTH                | BY                 |
+| CALL               | CASCADE             | CASE               |
+| CHANGE             | CHAR                | CHARACTER          |
+| CHECK              | COLLATE             | COLUMN             |
+| CONDITION          | CONNECTION          | CONSTRAINT         |
+| CONTINUE           | CONVERT             | CREATE             |
+| CROSS              | CURRENT_DATE        | CURRENT_TIME       |
+| CURRENT_TIMESTAMP  | CURRENT_USER        | CURSOR             |
+| DATABASE           | DATABASES           | DAY_HOUR           |
+| DAY_MICROSECOND    | DAY_MINUTE          | DAY_SECOND         |
+| DEC                | DECIMAL             | DECLARE            |
+| DEFAULT            | DELAYED             | DELETE             |
+| DESC               | DESCRIBE            | DETERMINISTIC      |
+| DISTINCT           | DISTINCTROW         | DIV                |
+| DOUBLE             | DROP                | DUAL               |
+| EACH               | ELSE                | ELSEIF             |
+| ENCLOSED           | ESCAPED             | EXISTS             |
+| EXIT               | EXPLAIN             | FALSE              |
+| FETCH              | FLOAT               | FLOAT4             |
+| FLOAT8             | FOR                 | FORCE              |
+| FOREIGN            | FROM                | FULLTEXT           |
+| GOTO               | GRANT               | GROUP              |
+| HAVING             | HIGH_PRIORITY       | HOUR_MICROSECOND   |
+| HOUR_MINUTE        | HOUR_SECOND         | IF                 |
+| IGNORE             | IN                  | INDEX              |
+| INFILE             | INNER               | INOUT              |
+| INSENSITIVE        | INSERT              | INT                |
+| INT1               | INT2                | INT3               |
+| INT4               | INT8                | INTEGER            |
+| INTERVAL           | INTO                | IS                 |
+| ITERATE            | JOIN                | KEY                |
+| KEYS               | KILL                | LABEL              |
+| LEADING            | LEAVE               | LEFT               |
+| LIKE               | LIMIT               | LINEAR             |
+| LINES              | LOAD                | LOCALTIME          |
+| LOCALTIMESTAMP     | LOCK                | LONG               |
+| LONGBLOB           | LONGTEXT            | LOOP               |
+| LOW_PRIORITY       | MATCH               | MEDIUMBLOB         |
+| MEDIUMINT          | MEDIUMTEXT          | MIDDLEINT          |
+| MINUTE_MICROSECOND | MINUTE_SECOND       | MOD                |
+| MODIFIES           | NATURAL             | NOT                |
+| NO_WRITE_TO_BINLOG | NULL                | NUMERIC            |
+| ON                 | OPTIMIZE            | OPTION             |
+| OPTIONALLY         | OR                  | ORDER              |
+| OUT                | OUTER               | OUTFILE            |
+| PRECISION          | PRIMARY             | PROCEDURE          |
+| PURGE              | RAID0               | RANGE              |
+| READ               | READS               | REAL               |
+| REFERENCES         | REGEXP              | RELEASE            |
+| RENAME             | REPEAT              | REPLACE            |
+| REQUIRE            | RESTRICT            | RETURN             |
+| REVOKE             | RIGHT               | RLIKE              |
+| SCHEMA             | SCHEMAS             | SECOND_MICROSECOND |
+| SELECT             | SENSITIVE           | SEPARATOR          |
+| SET                | SHOW                | SMALLINT           |
+| SPATIAL            | SPECIFIC            | SQL                |
+| SQLEXCEPTION       | SQLSTATE            | SQLWARNING         |
+| SQL_BIG_RESULT     | SQL_CALC_FOUND_ROWS | SQL_SMALL_RESULT   |
+| SSL                | STARTING            | STRAIGHT_JOIN      |
+| TABLE              | TERMINATED          | THEN               |
+| TINYBLOB           | TINYINT             | TINYTEXT           |
+| TO                 | TRAILING            | TRIGGER            |
+| TRUE               | UNDO                | UNION              |
+| UNIQUE             | UNLOCK              | UNSIGNED           |
+| UPDATE             | USAGE               | USE                |
+| USING              | UTC_DATE            | UTC_TIME           |
+| UTC_TIMESTAMP      | VALUES              | VARBINARY          |
+| VARCHAR            | VARCHARACTER        | VARYING            |
+| WHEN               | WHERE               | WHILE              |
+| WITH               | WRITE               | X509               |
+| XOR                | YEAR_MONTH          | ZEROFILL           |
+
 ## MySQL软件介绍
 
 ### MySQL产品特点
@@ -46,7 +129,7 @@
 
 ## MySQL的登录和退出
 
-### **先启动再登录**
+### 先启动再登录
 
 第一种方式
 
@@ -61,6 +144,8 @@ mysql -h（主机名） localhost -P(端口号) 3306 -u（用户名）-p（密�
  
 
 e.g.: mysql -h localhost -P 3306 -u root -p passwd
+
+
 
 ## 基本的DDL语句
 
@@ -134,5 +219,81 @@ create table 表的名字(
     	其他字段。。。。。。
 
 );
+```
+
+## 基本的查询语句
+
+### 1.查询所有的数据
+
+```mysql
+select * from person;
+```
+
+### 2.查询部分信息
+
+```mysql
+select name,phone from person;
+-- 指定列名进行查询
+
+-- 特别注意，当存在多个数据库时要使用数据库名.表名的形式书写表，例如：
+select name, age from demo.person;
+
+-- 指定列名
+select name as '名字' ,phone as '电话' from person;
+```
+
+### 3.最基本语法
+
+```mysql
+select *(全部)/列1,列2... from 表;
+```
+
+### 4.带条件的查询
+
+```mysql
+-- where查询
+
+select * from 表 where 查询条件 = 'xxxx';
+
+select * from person where name = 'zhuyuanzhang';
+
+-- 大于、小于、等于、范围的判断
+select * from person where age > 20; -- 挑选大于二十岁的人
+select * from person where age <= 20; -- 挑选小于等于二十岁的人
+select * from person where age between 18 and 20; -- 挑选年龄介于十八岁到二十岁之间的人
+-- 相当于 age >= 18 && age <= 20;
+
+-- 不等于
+select * from 表 where 列名 != 'xxx';
+
+-- 判空操作
+select * from 表 where 列名 is null;
+select * from 表 where 列名 is not null;
+
+-- 模糊搜索
+select * from 表 where 列名 like 'xxx';
+
+-- 查询包含在某数据集中的数据
+select * from 表 where 列名 in (数据集);
+```
+
+### 5.模糊搜索
+
+```mysql
+-- 模糊搜索
+select * from 表 where 列名 like 'xxx';
+-- 注意搜索条件关键词后通常跟着占位符，其中%代表任意数量和内容的字符，_(下划线)仅代表一个字符，例如：
+select * from person where name like 'zhu%'; -- 只要名字开头带zhu的都会被列出
+select * from person where name like 'zhu__'; -- 名字开头有zhu且zhu后面仅有两个字符的才会被选出
+select * from person where name like '%zhan%'; -- 只要名字里带zhan的都会被列出
+```
+
+### 6.查询包含在某数据集中的数据
+
+```mysql
+-- 查询包含在某数据集中的数据
+select * from 表 where 列名 in (数据集);
+
+select * from demo.person where age in (24, 25);
 ```
 
